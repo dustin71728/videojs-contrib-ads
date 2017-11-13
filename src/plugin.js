@@ -352,7 +352,9 @@ const contribAdsPlugin = function(options) {
         },
         play() {
           this.state = 'ads-ready?';
-          cancelContentPlay(player);
+          if (!player.ads.shouldPlayContentBehindAd(player)) {
+            cancelContentPlay(player);
+          }
           // remove the poster so it doesn't flash between videos
           removeNativePoster(player);
         },
@@ -368,7 +370,9 @@ const contribAdsPlugin = function(options) {
       events: {
         play() {
           this.state = 'preroll?';
-          cancelContentPlay(player);
+          if (!player.ads.shouldPlayContentBehindAd(player)) {
+            cancelContentPlay(player);
+          }
         },
         adskip() {
           this.state = 'content-playback';
@@ -418,7 +422,9 @@ const contribAdsPlugin = function(options) {
       },
       events: {
         play() {
-          cancelContentPlay(player);
+          if (!player.ads.shouldPlayContentBehindAd(player)) {
+            cancelContentPlay(player);
+          }
         },
         adstart() {
           this.state = 'ad-playback';
@@ -451,7 +457,9 @@ const contribAdsPlugin = function(options) {
       },
       events: {
         play() {
-          cancelContentPlay(player);
+          if (!player.ads.shouldPlayContentBehindAd(player)) {
+            cancelContentPlay(player);
+          }
         },
         adscanceled() {
           this.state = 'content-playback';
